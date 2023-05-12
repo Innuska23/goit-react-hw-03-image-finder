@@ -13,6 +13,7 @@ export class ImageGallery extends Component {
     error: null,
     status: 'i}dle',
     isLoading: false,
+    page: 1,
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -28,9 +29,9 @@ export class ImageGallery extends Component {
         }
       }
     
-      handlerBtnClick = event => {
-        this.requestToApi(this.state.word, this.state.gallery);
-      };
+      handlerBtnClick = () => {
+          this.setState(({ page }) => ({ page: page + 1 }));
+        };
     
       render() {
         const {
@@ -62,7 +63,7 @@ export class ImageGallery extends Component {
                   <GalleryItem key={id} webformatURL={webformatURL} tags={tags} />
                 ))}
               </Item>
-              {hits.length !== 0 && <LoadMoreBtn isDisabled={isLoading} onClick={this.handlerBtnClick } />}
+              {hits.length >= 12 && <LoadMoreBtn isDisabled={isLoading} onClick={this.handlerBtnClick} />}
             </Wrap>
           );
         }

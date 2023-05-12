@@ -17,9 +17,4 @@ export const Button = styled.button`
   font-size: 18px;
   line-height: 24px;
   min-width: 180px;
-
-    &: hover,
-    &: focus {
-        background-color: #303f9f;
-    }
 `;
