@@ -1,16 +1,18 @@
 import { Component } from 'react';
 
 import GalleryItem from './ImageGalleryItem/ImageGalleryItem';
-// import { BASE_PIXABAY_URL, DEFAULT_SEARCH_PARAM } from '../services/constans';
 import { Item, Wrap } from './ImageGallery.styled';
+import Loader from './ImageGalleryItem/Loader/Loader';
 
 import getImages from '../services/api'
+import LoadMoreBtn from './ImageGalleryItem/Button/Button';
 
 export class ImageGallery extends Component {
     state = {
     data: {},
     error: null,
     status: 'i}dle',
+    isLoading: false,
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -26,8 +28,8 @@ export class ImageGallery extends Component {
         }
       }
     
-      btnClickHandler = event => {
-        console.log(event);
+      handlerBtnClick = event => {
+        this.requestToApi(this.state.word, this.state.gallery);
       };
     
       render() {
@@ -35,6 +37,7 @@ export class ImageGallery extends Component {
           data: { hits },
           error,
           status,
+          isLoading
         } = this.state;
     
         if (status === 'idle') {
@@ -42,7 +45,7 @@ export class ImageGallery extends Component {
         }
     
         if (status === 'pending') {
-        //   return <Spinner/>;
+          return <Loader visible={isLoading}/>;
         }
     
         if (status === 'rejected') {
@@ -59,7 +62,7 @@ export class ImageGallery extends Component {
                   <GalleryItem key={id} webformatURL={webformatURL} tags={tags} />
                 ))}
               </Item>
-              {/* {hits.length !== 0 && <LoadMoreBtn onClick={this.btnClickHandler} />} */}
+              {hits.length !== 0 && <LoadMoreBtn isDisabled={isLoading} onClick={this.handlerBtnClick } />}
             </Wrap>
           );
         }
