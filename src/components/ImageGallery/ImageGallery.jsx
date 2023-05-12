@@ -1,37 +1,26 @@
 import { Component } from 'react';
 
 import GalleryItem from './ImageGalleryItem/ImageGalleryItem';
-import { BASE_PIXABAY_URL, DEFAULT_SEARCH_PARAM } from '../services/constans';
+// import { BASE_PIXABAY_URL, DEFAULT_SEARCH_PARAM } from '../services/constans';
 import { Item, Wrap } from './ImageGallery.styled';
+
+import getImages from '../services/api'
 
 export class ImageGallery extends Component {
     state = {
     data: {},
     error: null,
-    status: 'idle',
+    status: 'i}dle',
     };
 
     componentDidUpdate(prevProps, prevState) {
         const prevSearchQuery = prevProps.searchQuery;
         const nextSearchQuery = this.props.searchQuery;
-
-        const requestParam = DEFAULT_SEARCH_PARAM;
-        const searchParams = new URLSearchParams(requestParam);
     
         if (prevSearchQuery !== nextSearchQuery) {
           this.setState({ status: 'pending' });
     
-          fetch(
-            `${BASE_PIXABAY_URL}?${searchParams}`
-          )
-            .then(response => {
-              if (response.ok) {
-                return response.json();
-              }
-              return Promise.reject(
-                new Error('Error')
-              );
-            })
+            getImages(nextSearchQuery)
             .then(data => this.setState({ data, status: 'resolved' }))
             .catch(error => this.setState({ error, status: 'rejected' }));
         }
