@@ -7,7 +7,9 @@ export class App extends Component {
   state = {
     searchQuery: '',
     modalImg: '',
-    showModal: false,
+    isShowModal: false,
+    largeImageURL: '',
+    tags: '',
   };
 
   handlerSubmit = searchQuery => {
@@ -15,7 +17,7 @@ export class App extends Component {
   };
 
   toggleModal = () => {
-    this.setState(({ showModal }) => ({ showModal: !showModal }))
+    this.setState(({ isShowModal }) => ({ isShowModal: !isShowModal }))
   }
 
   getLargeImg = url => {
@@ -23,13 +25,17 @@ export class App extends Component {
     this.setState({ modalImg: url });
   }
 
+  showModal = (url) => {
+    this.setState({largeImageURL: url, isShowModal: true});
+  }
+
   render() {
-    const { modalImg, showModal} = this.state;
+    const { modalImg, isShowModal, largeImageURL, tags} = this.state;
   return (
     <div>
       <Searchbar onSubmit={this.handlerSubmit} />
-      <ImageGallery searchQuery={this.state.searchQuery} />
-      {showModal && <Modal url={modalImg} onClose={this.toggleModal} />}
+      <ImageGallery searchQuery={this.state.searchQuery} showModal={this.showModal}/>
+      {isShowModal && <Modal url={modalImg} src={largeImageURL} alt={tags} onClose={this.toggleModal} />}
     </div>
   );
 };

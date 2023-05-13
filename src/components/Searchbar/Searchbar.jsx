@@ -36,14 +36,6 @@ class Searchbar extends Component {
               onChange={this.onChange}
               value={value}
             />
-  
-            <Button onClick={this.onReset} type="reset">
-              {/* <FaRegWindowClose
-                className="icon"
-                size={20}
-                color={value ? 'red' : 'transparent'}
-              /> */}
-            </Button>
           </Form>
         </Header>
       );
