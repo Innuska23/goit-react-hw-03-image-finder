@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import icon from '../../assets/icons/search.svg'
 
 export const Header = styled.header`
   top: 0;
@@ -20,7 +21,7 @@ export const Header = styled.header`
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     `;
 
-  export const Form = styled.form`
+export const Form = styled.form`
     display: flex;
     align-items: center;
     width: 100%;
@@ -30,11 +31,10 @@ export const Header = styled.header`
     overflow: hidden;
   `;
 
-  export const Button = styled.button`
+export const Button = styled.button`
 display: inline-block;
 width: 48px;
 border: 0;
-background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
 height: 48px;
 background-size: 40%;
 background-repeat: no-repeat;
@@ -43,12 +43,11 @@ opacity: 0.6;
 transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
 cursor: pointer;
 outline: none;
-
-:hover {
-opacity: 1;
+  :hover {
+    opacity: 1;
 }
 `;
-export const Span = styled.span `
+export const Span = styled.span`
       position: absolute;
       width: 1px;
       height: 1px;
@@ -76,7 +75,11 @@ export const Input = styled.input`
     }
 `;
 
-//   .icon {
-//     transform: translateY(3px);
-//   }
-// `;
+export const StyledSvg = styled.svg`
+    background-image: url(${icon});
+    background-size: 25px;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+`; 

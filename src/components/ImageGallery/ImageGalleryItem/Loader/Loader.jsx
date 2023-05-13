@@ -1,8 +1,7 @@
-import {Circles} from 'react-loader-spinner';
-import { WrapLoader } from './Loader.styled';
+import { Circles } from 'react-loader-spinner';
 
 const Loader = () => (
-    <WrapLoader>
+    <div>
         <Circles
             height="80"
             width="80"
@@ -10,14 +9,14 @@ const Loader = () => (
             ariaLabel="circles-loading"
             wrapperStyle={{
                 position: "fixed",
-                top: "50%", 
-                left: "50%", 
+                top: "50%",
+                left: "50%",
                 transform: "translate(-50%, -50%)",
             }}
             wrapperClass=""
             visible={true}
         />
-    </WrapLoader>
+    </div>
 );
 
 export default Loader;

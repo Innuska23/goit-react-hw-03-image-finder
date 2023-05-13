@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import {ItemGallery, ImageGallery } from './ImageGalleryItem.styled';
+import { ItemGallery, ImageGallery } from './ImageGalleryItem.styled';
 
-const GalleryItem = ({ webformatURL, tags, largeImageURL, openModal}) => (
+const GalleryItem = ({ webformatURL, tags, largeImageURL, openModal }) => (
     <ItemGallery>
         <ImageGallery
-        src={webformatURL}
-        alt={tags}
-        onClick={() => openModal(largeImageURL, tags)}
+            src={webformatURL}
+            alt={tags}
+            onClick={() => openModal(largeImageURL, tags)}
 
         />
     </ItemGallery>

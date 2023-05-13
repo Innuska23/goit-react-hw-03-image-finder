@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const ItemGallery  = styled.li`
+export const ItemGallery = styled.li`
 `;
 
 export const ImageGallery = styled.img`

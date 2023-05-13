@@ -1,15 +1,8 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {ModalImg, ModalStyle, Overlay} from './Modal.styled';
+import { ModalImg, ModalStyle, Overlay } from './Modal.styled';
 class Modal extends Component {
-    static propTypes = {
-        url: PropTypes.string.isRequired,
-        onClose: PropTypes.func.isRequired,
-    };
-
-    state = {}
-
     componentDidMount() {
         window.addEventListener('keydown', this.clickEsc);
     }
@@ -34,7 +27,7 @@ class Modal extends Component {
         return (
             <Overlay onClick={this.clickBackdrop}>
                 <ModalStyle>{this.props.children}
-                <ModalImg src={this.props.src} alt={this.props.alt}/>
+                    <ModalImg src={this.props.imgData.largeImageURL} alt={this.props.imgData.tags} />
                 </ModalStyle>
             </Overlay>
         )
@@ -43,7 +36,10 @@ class Modal extends Component {
 
 Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
-    children: PropTypes.node,
+    imgData: PropTypes.shape({
+        largeImageURL: PropTypes.string,
+        tags: PropTypes.string
+    }).isRequired,
 };
 
 export default Modal;
