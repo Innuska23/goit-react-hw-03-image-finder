@@ -1,25 +1,29 @@
 import { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Header, Form, Button, Input, StyledSvg} from './Searchbar.styled';
-
-// import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg'
+import { toast } from 'react-toastify';
 
 class Searchbar extends Component {
   state = {
     value: '',
   };
 
-  onReset = () => this.setState({ value: '' });
-
   handlerSubmit = e => {
-    const word = e.target.elements[1].value.trim();
-
     e.preventDefault();
-    if (word) this.props.onSubmit(word);
-  };
 
-  onChange = e => this.setState({ value: e.target.value });
+    if (this.state.value.trim() === '') {
+      toast("What are you searching for?");
+      return;
+  };
+  this.props.onSubmit(this.state.value);
+  this.setState({ value: '' });
+}
+
+  onChange = event => {
+    this.setState({ value: event.currentTarget.value.toLowerCase() })
+}
 
   render() {
     const { value } = this.state;

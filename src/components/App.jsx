@@ -3,6 +3,9 @@ import { Component } from 'react';
 import Searchbar from "./Searchbar/Searchbar";
 import ImageGallery from './ImageGallery/ImageGallery';
 import Modal from './ImageGallery/ImageGalleryItem/Modal/Modal';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 export class App extends Component {
   state = {
     modalImg: {
@@ -14,7 +17,7 @@ export class App extends Component {
   };
 
   handlerSubmit = searchQuery => {
-    this.setState({ searchQuery });
+    this.setState({searchQuery });
   };
 
   hideModal = () => {
@@ -33,6 +36,7 @@ export class App extends Component {
         <Searchbar onSubmit={this.handlerSubmit} />
         <ImageGallery searchQuery={this.state.searchQuery} showModal={this.showModal} />
         {isShowModal && <Modal imgData={modalImg} onClose={this.hideModal} />}
+        <ToastContainer position='top-center'/>
       </div>
     );
   };
