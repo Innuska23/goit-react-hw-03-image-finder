@@ -13,7 +13,6 @@ export class ImageGallery extends Component {
     totalPage: 0,
     error: null,
     status: 'idle',
-    isLoading: false,
     page: 1,
     largeImageURL: '',
     tags: '',
@@ -28,13 +27,17 @@ export class ImageGallery extends Component {
     const isNewSearchQuery = prevSearchQuery !== nextSearchQuery;
 
     if (isNewSearchQuery) {
-      this.setState({ imageList: [] });
+      this.setState({ imageList: [], page: 1 });
     }
 
     if (isNewSearchQuery || prevPage !== currentPage) {
+      const requestPage= isNewSearchQuery ? 1 : currentPage;
+
+      if (this.state.status === 'pending') return 
+
       this.setState({ status: 'pending' });
 
-      getImages(nextSearchQuery, currentPage)
+      getImages(nextSearchQuery, requestPage)
         .then(data => this.setState((currentState) => ({
           imageList: currentState.imageList.concat(data.hits),
           totalPage: data.totalPage,
@@ -56,7 +59,6 @@ export class ImageGallery extends Component {
       imageList,
       error,
       status,
-      isLoading,
       page,
       totalPage
     } = this.state;
@@ -66,7 +68,7 @@ export class ImageGallery extends Component {
     }
 
     if (status === 'pending' && imageList.length === 0) {
-      return <Loader visible={isLoading} />;
+      return <Loader visible />;
     }
 
     if (status === 'rejected') {
@@ -87,7 +89,7 @@ export class ImageGallery extends Component {
           ))}
         </Item>
 
-        {page < totalPage && <LoadMoreBtn isDisabled={isLoading} onClick={this.handlerBtnClick} />}
+        {page < totalPage && <LoadMoreBtn isLoading={status === 'pending'} onClick={this.handlerBtnClick} />}
       </Wrap>
     );
   }
